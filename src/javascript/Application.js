@@ -28,7 +28,7 @@ export default class Application
         this.sizes = new Sizes()
         this.resources = new Resources()
 
-        this.setConfig()
+        this.setConfig()    // 配置
         this.setDebug()
         this.setRenderer()
         this.setCamera()
@@ -45,10 +45,12 @@ export default class Application
         this.config = {}
         this.config.debug = window.location.hash === '#debug'
         this.config.cyberTruck = window.location.hash === '#cybertruck'
+        console.log(window)
         this.config.touch = false
 
         window.addEventListener('touchstart', () =>
         {
+            // 移动端事件 touchstart
             this.config.touch = true
             this.world.controls.setTouch()
 
