@@ -134,20 +134,30 @@ export default class
         let result = null
 
         // Default args
-        const args = !(_args instanceof Array) ? [] : _args
-
+        const args = !(_args instanceof Array) ? [] : _args        
         // Resolve names (should on have one event)
-        let name = this.resolveNames(_name)
-
+        let name = this.resolveNames(_name) // 处理多个事件名称(多个事件用逗号分隔). 比如 _name='tick' 会被转化成 name = ['tick']
+        
         // Resolve name
-        name = this.resolveName(name[ 0 ])
+        /**
+         * 处理事件名称,比如 _name=['tick']会被转换成
+         * {
+         *  original: 'tick',
+         *  value: 'tick',
+         *  namespace: 'base'
+         * }
+         */
+        
+        name = this.resolveName(name[ 0 ]) 
 
         // Default namespace
+        // 通过命名空间namespace和name.value值 找到并执行事件的回调函数（多个）.
         if(name.namespace === 'base')
         {
             // Try to find callback in each namespace
             for(const namespace in that.callbacks)
             {
+                // console.log(that.callbacks);
                 if(that.callbacks[ namespace ] instanceof Object && that.callbacks[ namespace ][ name.value ] instanceof Array)
                 {
                     that.callbacks[ namespace ][ name.value ].forEach(function(callback)

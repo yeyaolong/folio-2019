@@ -23,15 +23,15 @@ export default class Time extends EventEmitter
      */
     tick()
     {
-        this.ticker = window.requestAnimationFrame(this.tick)
+        this.ticker = window.requestAnimationFrame(this.tick)   // threejs方法 用于实现帧动画.本质上是setInterval函数.
 
         const current = Date.now()
 
-        this.delta = current - this.current
-        this.elapsed = current - this.start
+        this.delta = current - this.current // 上一帧与这一帧的时间间隔，理解为刷新率
+        this.elapsed = current - this.start // 动画已经运行的总时长
         this.current = current
 
-        if(this.delta > 60)
+        if(this.delta > 60) // 
         {
             this.delta = 60
         }

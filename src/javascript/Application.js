@@ -26,8 +26,14 @@ export default class Application
         // Set up
         this.time = new Time()
         this.sizes = new Sizes()
+<<<<<<< HEAD
         this.resources = new Resources()        
         this.setConfig()
+=======
+        this.resources = new Resources()
+
+        this.setConfig()    // 配置
+>>>>>>> 42fd2830766ba663ebbe41a61a194f01d8c4acc9
         this.setDebug()
         this.setRenderer()
         this.setCamera()
@@ -44,12 +50,17 @@ export default class Application
         this.config = {}
         this.config.debug = window.location.hash === '#debug'
         this.config.cyberTruck = window.location.hash === '#cybertruck'
+        console.log(window)
         this.config.touch = false
         
         // touchstart 移动端触摸事件
         window.addEventListener('touchstart', () =>
         {
+<<<<<<< HEAD
             console.log('touchstart')
+=======
+            // 移动端事件 touchstart
+>>>>>>> 42fd2830766ba663ebbe41a61a194f01d8c4acc9
             this.config.touch = true
             this.world.controls.setTouch()
             // this.passes 来自于 this.setPasses()方法的定义.
