@@ -26,8 +26,7 @@ export default class Application
         // Set up
         this.time = new Time()
         this.sizes = new Sizes()
-        this.resources = new Resources()
-
+        this.resources = new Resources()        
         this.setConfig()
         this.setDebug()
         this.setRenderer()
@@ -46,12 +45,15 @@ export default class Application
         this.config.debug = window.location.hash === '#debug'
         this.config.cyberTruck = window.location.hash === '#cybertruck'
         this.config.touch = false
-
+        
+        // touchstart 移动端触摸事件
         window.addEventListener('touchstart', () =>
         {
+            console.log('touchstart')
             this.config.touch = true
             this.world.controls.setTouch()
-
+            // this.passes 来自于 this.setPasses()方法的定义.
+            // 因为这里是addEventElistener的回调函数，所以在触发touchestart时，已经有this.passes对象了
             this.passes.horizontalBlurPass.strength = 1
             this.passes.horizontalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(this.passes.horizontalBlurPass.strength, 0)
             this.passes.verticalBlurPass.strength = 1
